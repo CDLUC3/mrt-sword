@@ -1,0 +1,146 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.cdlib.mrt</groupId>
+  <artifactId>mrt-swordwarpub</artifactId>
+  <packaging>war</packaging>
+  <version>1.0-SNAPSHOT</version>
+  <name>UC3-mrtSwordWarPub</name>
+  <url>http://uc3.cdlib.org</url>
+
+  <!-- force UTF-8 -->
+ <properties>
+      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+      <propertyDir>test</propertyDir>
+  </properties>
+
+    <profiles>
+      <profile>
+          <id>uc3</id>
+          <activation>
+            <activeByDefault>true</activeByDefault>
+          </activation>
+          <properties>
+              <warLocation>war/${propertyDir}</warLocation>
+              <warName>mrtsword.war</warName>
+          </properties>
+      </profile>
+    </profiles>
+
+  <build>
+    <plugins>
+    <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>copy</id>
+            <phase>install</phase>
+            <goals>
+              <goal>copy</goal>
+            </goals>
+            <configuration>
+              <artifactItems>
+                <artifactItem>
+                    <groupId>org.cdlib.mrt</groupId>
+                    <artifactId>mrt-swordwarpub</artifactId>
+                    <version>1.0-SNAPSHOT</version>
+                    <type>war</type>
+                     <overWrite>true</overWrite>
+                     <outputDirectory>./${warLocation}</outputDirectory>
+                     <destFileName>${warName}</destFileName>
+                </artifactItem>
+              </artifactItems>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+  
+    
+
+   <dependencies>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>2.4</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.cdlib.mrt</groupId>
+            <artifactId>mrt-swordsrcpub</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.cdlib.mrt</groupId>
+            <artifactId>mrt-swordconfpub</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.cdlib.mrt</groupId>
+            <artifactId>mrt-inventorysrc</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.cdlib.mrt</groupId>
+            <artifactId>mrt-confmysql</artifactId>
+            <version>${propertyDir}-1.0-SNAPSHOT</version>
+        </dependency>
+      
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.15</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>javax.mail</groupId>
+                    <artifactId>mail</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>javax.jms</groupId>
+                    <artifactId>jms</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.sun.jdmk</groupId>
+                    <artifactId>jmxtools</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.sun.jmx</groupId>
+                    <artifactId>jmxri</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.abdera</groupId>
+            <artifactId>abdera-client</artifactId>
+            <version>1.1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-fileupload</groupId>
+            <artifactId>commons-fileupload</artifactId>
+            <version>1.2.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.hp.hpl.jena</groupId>
+            <artifactId>jena</artifactId>
+            <version>2.6.4</version>
+        </dependency>
+        <dependency>
+            <groupId>xom</groupId>
+            <artifactId>xom</artifactId>
+            <version>1.1</version>
+        </dependency>
+    </dependencies>
+</project>
+
+
+
+
+
+
+
+
+
+
+
