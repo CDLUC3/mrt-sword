@@ -34,7 +34,7 @@ public class MerrittServiceDocument
     {
         System.out.println("getCollection entered");
         Connection connection = null;
-        ArrayList<InvCollection> invList = new ArrayList();
+        ArrayList<InvCollection> invList = new ArrayList<>();
         try {
             System.out.println("MerrittServiceDocument.getCOllection:"
                     + " - user:" + user

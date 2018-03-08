@@ -22,7 +22,7 @@ public class EditHandler
     private HttpServletRequest request = null;
     private String boundry = null;
     private String md5 = null;
-    private HashMap<String, String> headers = new HashMap();
+    private HashMap<String, String> headers = new HashMap<>();
     private File requestFile = null;
     private File zipFile = null;
     private long zipOffset = 0;
