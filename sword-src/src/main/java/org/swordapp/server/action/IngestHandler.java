@@ -194,7 +194,7 @@ http://uc3-mrt-wrk1-dev.cdlib.org:33121/submit-object
                 submitter += "/" + comment;
             }
             
-            RequestConfig requestConfig = RequestConfig.custom().setConnectTimeout(6 * 3600 * 1000).build();
+            RequestConfig requestConfig = RequestConfig.custom().setConnectTimeout(24 * 3600 * 1000).build();
             HttpClient httpClient = HttpClientBuilder.create().setDefaultRequestConfig(requestConfig).build();
             HttpPost httppost = new HttpPost(url.toString());
 
