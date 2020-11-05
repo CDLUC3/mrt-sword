@@ -4,3 +4,5 @@ target/
 *.classpath
 */.gitignore
 *.war
+sword-src/.factorypath
+sword-war/.factorypath
