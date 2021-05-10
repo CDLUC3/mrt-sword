@@ -11,7 +11,7 @@ This microservice is used by the [Dryad](https://datadryad.org/) service.
 Additional clients of this service are not expected. 
 
 ## Component Diagram
-![Flowchart](https://github.com/CDLUC3/mrt-doc/raw/master/diagrams/sword.mmd.svg)
+![Flowchart](https://github.com/CDLUC3/mrt-doc/raw/main/diagrams/sword.mmd.svg)
 
 ## Dependencies
 
