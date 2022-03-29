@@ -31,7 +31,6 @@
     </plugins>
   </build>
 
-
   <dependencies>
     <dependency>
       <groupId>com.google.appengine</groupId>
@@ -43,6 +42,12 @@
       <groupId>com.hp.hpl.jena</groupId>
       <artifactId>jena</artifactId>
       <version>2.6.4</version>
+    </dependency>
+
+    <dependency>
+      <groupId>commons-codec</groupId>
+      <artifactId>commons-codec</artifactId>
+      <version>1.4</version>
     </dependency>
 
     <dependency>
@@ -68,6 +73,12 @@
       <artifactId>javax.servlet-api</artifactId>
       <version>3.0.1</version>
       <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.5</version>
     </dependency>
 
     <dependency>
@@ -101,9 +112,39 @@
     </dependency>
 
     <dependency>
+      <groupId>org.apache.abdera</groupId>
+      <artifactId>abdera-core</artifactId>
+      <version>1.1.1</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.abdera</groupId>
+      <artifactId>abdera-i18n</artifactId>
+      <version>1.1.1</version>
+    </dependency>
+
+    <dependency>
       <groupId>org.apache.camel</groupId>
       <artifactId>camel-mail</artifactId>
       <version>2.16.0</version> 
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.httpcomponents</groupId>
+      <artifactId>httpclient</artifactId>
+      <version>4.4.1</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.httpcomponents</groupId>
+      <artifactId>httpcore</artifactId>
+      <version>4.4.1</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.httpcomponents</groupId>
+      <artifactId>httpmime</artifactId>
+      <version>4.4.1</version>
     </dependency>
 
     <dependency>
@@ -140,6 +181,18 @@
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
       <version>1.5.8</version>
+    </dependency>
+
+    <dependency>
+      <groupId>stax</groupId>
+      <artifactId>stax-api</artifactId>
+      <version>1.0.1</version>
+    </dependency>
+
+    <dependency>
+      <groupId>xml-apis</groupId>
+      <artifactId>xml-apis</artifactId>
+      <version>1.4.01</version>
     </dependency>
 
     <dependency>
