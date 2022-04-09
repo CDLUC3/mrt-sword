@@ -56,6 +56,7 @@
       <version>1.2.1</version>
     </dependency>
 
+<!--
     <dependency> 
       <groupId>commons-io</groupId>
       <artifactId>commons-io</artifactId> 
@@ -67,6 +68,7 @@
       <artifactId>mail</artifactId>
       <version>1.4</version>
     </dependency>
+-->
 
     <dependency>
       <groupId>javax.servlet</groupId>
@@ -79,6 +81,7 @@
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>4.5</version>
+      <scope>test</scope>
     </dependency>
 
     <dependency>
@@ -105,11 +108,13 @@
       </exclusions>
     </dependency>
 
+<!--
     <dependency>
       <groupId>org.apache.abdera</groupId>
       <artifactId>abdera-client</artifactId>
       <version>1.1.1</version>
     </dependency>
+-->
 
     <dependency>
       <groupId>org.apache.abdera</groupId>
@@ -123,11 +128,13 @@
       <version>1.1.1</version>
     </dependency>
 
+<!--
     <dependency>
       <groupId>org.apache.camel</groupId>
       <artifactId>camel-mail</artifactId>
       <version>2.16.0</version> 
     </dependency>
+-->
 
     <dependency>
       <groupId>org.apache.httpcomponents</groupId>
@@ -151,12 +158,19 @@
       <groupId>org.cdlib.mrt</groupId>
       <artifactId>mrt-confmysql</artifactId>
       <version>${propertyDir}-1.0-SNAPSHOT</version>
+      <scope>runtime</scope>
     </dependency> 
 
     <dependency>
       <groupId>org.cdlib.mrt</groupId>
       <artifactId>mrt-core</artifactId>
       <version>2.0-SNAPSHOT</version>
+      <exclusions>
+        <exclusion>
+            <groupId>stax</groupId>
+            <artifactId>stax-api</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>  
 
     <dependency>
@@ -169,8 +183,10 @@
       <groupId>org.cdlib.mrt</groupId>
       <artifactId>mrt-swordconfpub</artifactId>
       <version>1.0-SNAPSHOT</version>
+      <scope>runtime</scope>
     </dependency>
 
+<!--
     <dependency>
       <groupId>org.codehaus.woodstox</groupId>
       <artifactId>wstx-asl</artifactId>
@@ -182,12 +198,15 @@
       <artifactId>slf4j-api</artifactId>
       <version>1.5.8</version>
     </dependency>
+-->
 
+<!--
     <dependency>
       <groupId>stax</groupId>
       <artifactId>stax-api</artifactId>
       <version>1.0.1</version>
     </dependency>
+-->
 
     <dependency>
       <groupId>xml-apis</groupId>
@@ -216,12 +235,25 @@
 </project>
 
 
-<!-- commented out dependencies -->
+<!--
+[INFO] - maven-dependency-plugin:2.1:analyze (default-cli) @ mrt-swordsrcpub -
+[WARNING] Unused declared dependencies found:
+[WARNING]    commons-io:commons-io:jar:1.3.2:compile
+[WARNING]    javax.mail:mail:jar:1.4:compile
+[WARNING]    org.apache.abdera:abdera-client:jar:1.1.1:compile
+[WARNING]    org.apache.camel:camel-mail:jar:2.16.0:compile
+[WARNING]    org.cdlib.mrt:mrt-confmysql:jar:test-1.0-SNAPSHOT:compile
+[WARNING]    org.cdlib.mrt:mrt-swordconfpub:jar:1.0-SNAPSHOT:compile
+[WARNING]    org.codehaus.woodstox:wstx-asl:jar:3.2.6:compile
+[WARNING]    org.slf4j:slf4j-api:jar:1.5.8:compile
+[WARNING]    xml-apis:xml-apis:jar:1.4.01:compile
 
-    <!-- https://mvnrepository.com/artifact/javax.mail/mail
-    <dependency>
-      <groupId>javax.mail</groupId>
-      <artifactId>mail</artifactId>
-      <version>1.4</version>
-    </dependency> 
-            -->
+Keeping:
+  org.cdlib.mrt:mrt-confmysql:jar:test-1.0-SNAPSHOT:runtime
+  org.cdlib.mrt:mrt-swordconfpub:jar:1.0-SNAPSHOT:runtime
+
+Notes
+  removed stax:stax-api from deps
+  excluded stax:stax-api from mrt-core transitive deps
+
+--> 
