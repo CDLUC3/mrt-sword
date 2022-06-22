@@ -19,7 +19,7 @@ pipeline {
 
       //working vars
       M2DIR = "${HOME}/.m2-sword"
-      DEF_BRANCH = "master"
+      DEF_BRANCH = "refactor"
     }
     agent any
 
