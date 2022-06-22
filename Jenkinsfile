@@ -11,15 +11,15 @@ pipeline {
      */
     environment {      
       //Branch/tag names to incorporate into the build.  Create one var for each repo.
-      BRANCH_CORE = 'java-refactor'
+      BRANCH_CORE = 'main'
       BRANCH_CLOUD = 'main'
       BRANCH_ZK = 'main'
       BRANCH_MRTZOO = 'main'
       BRANCH_INV = 'main'
 
       //working vars
-      M2DIR = "${HOME}/.m2-replic"
-      DEF_BRANCH = "main"
+      M2DIR = "${HOME}/.m2-sword"
+      DEF_BRANCH = "master"
     }
     agent any
 
