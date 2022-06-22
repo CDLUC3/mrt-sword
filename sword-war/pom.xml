@@ -82,11 +82,6 @@
             <artifactId>mrt-inventorysrc</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
-        <dependency>
-            <groupId>org.cdlib.mrt</groupId>
-            <artifactId>mrt-confmysql</artifactId>
-            <version>${propertyDir}-1.0-SNAPSHOT</version>
-        </dependency>
       
         <dependency>
             <groupId>log4j</groupId>
@@ -119,7 +114,7 @@
         <dependency>
             <groupId>commons-fileupload</groupId>
             <artifactId>commons-fileupload</artifactId>
-            <version>1.2.1</version>
+            <version>1.3.3</version>
         </dependency>
         <dependency>
             <groupId>com.hp.hpl.jena</groupId>
