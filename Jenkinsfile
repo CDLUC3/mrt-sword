@@ -49,6 +49,19 @@ pipeline {
                 }
             }
         }
+        stage('Build Cloud') {
+            steps {
+                dir('mrt-cloud') {
+                  script {
+                    new BuildFunctions().build_library(
+                      'https://github.com/CDLUC3/mrt-cloud.git', 
+                      env.BRANCH_CLOUD, 
+                      '-DskipTests'
+                    )
+                  }
+                }
+            }
+        }
         stage('Build CDL ZK Queue') {
             steps {
                 dir('cdl-zk-queue') {
