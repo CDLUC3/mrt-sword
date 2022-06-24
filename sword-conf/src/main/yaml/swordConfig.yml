@@ -1,0 +1,86 @@
+which-sword-info: "{!ENV: MERRITT_SWORD_INFO !DEFAULT: sword-info}"
+  
+sword-info:
+  service:
+    home: "{!SSM: sword/config/home !DEFAULT: /dpr2/mrtHome/sword}"
+    maxUploadSize: "{!SSM: sword/config/maxUploadSize !DEFAULT: 100000000000}"
+    jssecacert: "{!ENV: JSSECACERT_SWORD !DEFAULT: /dpr2/mrtHome/sword/jssecacert}"
+    ldapHost: "{!SSM: sword/config/ldapHost !DEFAULT: NONE}"
+    link: "{!SSM: sword/config/link !DEFAULT: NONE}"
+    editmedia: "{!SSM: sword/config/editmedia !DEFAULT: NONE}"
+    edit: "{!SSM: sword/config/edit !DEFAULT: NONE}"
+    ingestUrlAdd: "{!SSM: sword/config/ingestUrlAdd !DEFAULT: NONE}"
+    ingestUrlUpdate: "{!SSM: sword/config/ingestUrlUpdate !DEFAULT: NONE}"
+    retainTargetUrl: "{!SSM: sword/config/retainTargetUrl !DEFAULT: true}"
+
+  fileLogger:
+    messageMaximumLevel: "{!SSM: sword/config/log/messageMaximumLevel !DEFAULT: 5}"
+    messageMaximumError: "{!SSM: sword/config/log/messageMaximumError !DEFAULT: 10}"
+    path: "{!ENV: LOG_SWORD !DEFAULT: /dpr2/mrtHomes/swordHome}"
+    name: sword
+    qualifier: yyMMdd
+    trace: 5
+  
+  log4jAppender:
+    rootLogger: "DEBUG, stdout, file"
+
+# Redirect log messages to console
+    stdout: org.apache.log4j.ConsoleAppender
+    stdout.Target: System.out
+    stdout.layout: org.apache.log4j.PatternLayout
+    stdout.layout.ConversionPattern: "%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n"
+
+# Redirect log messages to a log file, support file rolling.
+    file: org.apache.log4j.RollingFileAppender
+    file.File: /dpr2/mrtHomes/sword/log4j
+    file.MaxFileSize: 5MB
+    file.MaxBackupIndex: 10
+    file.layout: org.apache.log4j.PatternLayout
+    file.layout.ConversionPattern: "%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n"
+    
+  db:
+    user: "{!SSM: inv/readwrite/db-user}"
+    password: "{!SSM: inv/readwrite/db-password}"
+    host: "{!SSM: inv/db-host}"
+    name: "{!SSM: inv/db-name}"
+    encoding: "{!SSM: inv/db-encoding !DEFAULT: useUnicode=true&characterEncoding=UTF-8&characterSetResults=UTF-8}"
+
+sword-info-docker: &docker
+  service:
+    threadPool: "5"
+    queueCapacity: 15
+    nodePath: "yaml:"
+    replicQualify: "NONE"
+    
+  state:
+    id: replic
+    name: UC3
+    description: "UC3 replic micro-service"
+    version: "replic version"
+    serviceScheme: "Replic/1.0"
+    
+  cleanup:
+    subject: "Merritt Replication Cleanup Stage"
+    from: "uc3staff@ucop.edu"
+    to: "NONE"
+    msg: "Merritt Replication Cleanup Stage"
+
+  fileLogger:
+    messageMaximumLevel: 5
+    messageMaximumError: 10
+    path: /tdr/tmpdir
+    name: inv
+    qualifier: yyMMdd
+    trace: 5
+
+  db:
+    adapter: mysql2
+    host: db-container
+    name: db-name
+    user: user
+    password: password
+    encoding: "characterEncoding=UTF-8&characterSetResults=UTF-8&useSSL=false&serverTimezone=UTC"   # schema won't load if it's utf8mb4
+
+  scan:
+    maxkeys: 500
+    threadSleep: 100

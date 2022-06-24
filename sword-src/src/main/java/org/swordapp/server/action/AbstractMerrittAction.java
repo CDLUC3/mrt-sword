@@ -34,8 +34,9 @@ public class AbstractMerrittAction
     protected static final String NAME = "AbstractMerrittManager";
     protected static final String MESSAGE = NAME + ": ";
     
+    protected static SwordConfig swordConfig = null;
     protected Properties serviceProperties;
-    protected final Properties setupProp;
+    //protected final Properties setupProp;
     protected long maxUploadSize = -1;
     protected File certFile = null;
     protected String ldapHost = null;
@@ -53,6 +54,7 @@ public class AbstractMerrittAction
         throws SwordError, SwordServerException, SwordAuthException
     {
         try {
+            /*
             String propertyList[] = {
                 "resources/Mysql.properties",
                 "resources/Sword.properties",
@@ -60,6 +62,10 @@ public class AbstractMerrittAction
             };
             TFrame tFrame = new TFrame(propertyList, "ServiceDocumentManager");
             setupProp = tFrame.getProperties();
+            */
+            if (swordConfig == null) {
+                swordConfig = SwordConfig.useYaml();
+            }
             setConstruct();
             
         } catch (Exception ex) {
@@ -73,39 +79,10 @@ public class AbstractMerrittAction
         throws SwordError
     {
         try {
-            String invServiceS = setupProp.getProperty("SwordService");
-            if (StringUtil.isEmpty(invServiceS)) {
-                throw new SwordError(MESSAGE + "missing property: SwordService");
-            }
-
-            try {
-                db = new DPRFileDB(logger, setupProp);
-            } catch (Exception ex) {
-                throw new SwordError(MESSAGE + "CertsLDAP exception:" + ex);
-            }
+            db = swordConfig.getDB();
+            serviceProperties = swordConfig.getServiceProperties();
+            logger = swordConfig.getLogger();
             
-            swordService = new File(invServiceS);
-            if (!swordService.exists()) {
-                throw new SwordError(MESSAGE + "inv service directory does not exist:"
-                        + swordService.getCanonicalPath());
-            }
-            
-            File logDir = new File(swordService, "log");
-            if (!logDir.exists()) {
-                logDir.mkdir();
-            }
-            
-            File infoF = new File(swordService, "sword-info.txt");
-            InputStream fis = new FileInputStream(infoF);
-            serviceProperties = new Properties();
-            serviceProperties.load(fis);
-            System.out.println(PropertiesUtil.dumpProperties(NAME, serviceProperties));
-            
-            try {
-                logger = new TFileLogger("sword", logDir.getCanonicalPath() + '/', setupProp);
-            } catch (Exception ex) {
-                throw new SwordError(MESSAGE + "initialize log exception:" + ex);
-            }
             
             String maxUploadSizeS = serviceProperties.getProperty("maxUploadSize");
             if (StringUtil.isAllBlank(maxUploadSizeS)) {
@@ -327,8 +304,8 @@ public class AbstractMerrittAction
         return serviceProperties;
     }
 
-    public Properties getSetupProp() {
-        return setupProp;
+    public static SwordConfig getSwordConfig() {
+        return swordConfig;
     }
 
     public long getMaxUploadSize() {
