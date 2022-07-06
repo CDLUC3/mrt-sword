@@ -12,6 +12,10 @@ pipeline {
     environment {      
       //Branch/tag names to incorporate into the build.  Create one var for each repo.
       BRANCH_CORE = 'main'
+      BRANCH_CLOUD = 'main'
+      BRANCH_ZK = 'main'
+      BRANCH_MRTZOO = 'main'
+      BRANCH_INV = 'main'
 
       //working vars
       M2DIR = "${HOME}/.m2-sword"
@@ -39,6 +43,58 @@ pipeline {
                     new BuildFunctions().build_library(
                       'https://github.com/CDLUC3/mrt-core2.git', 
                       env.BRANCH_CORE, 
+                      '-DskipTests'
+                    )
+                  }
+                }
+            }
+        }
+        stage('Build Cloud') {
+            steps {
+                dir('mrt-cloud') {
+                  script {
+                    new BuildFunctions().build_library(
+                      'https://github.com/CDLUC3/mrt-cloud.git', 
+                      env.BRANCH_CLOUD, 
+                      '-DskipTests'
+                    )
+                  }
+                }
+            }
+        }
+        stage('Build CDL ZK Queue') {
+            steps {
+                dir('cdl-zk-queue') {
+                  script {
+                    new BuildFunctions().build_library(
+                      'https://github.com/CDLUC3/cdl-zk-queue.git', 
+                      env.BRANCH_ZK, 
+                      '-DskipTests'
+                    )
+                  }
+                }
+            }
+        }
+        stage('Build MRT Zoo') {
+            steps {
+                dir('mrt-zoo') {
+                  script {
+                    new BuildFunctions().build_library(
+                      'https://github.com/CDLUC3/mrt-zoo.git', 
+                      env.BRANCH_MRTZOO, 
+                      '-DskipTests'
+                    )
+                  }
+                }
+            }
+        }
+        stage('Build Inventory Source') {
+            steps {
+                dir('mrt-inventory') {
+                  script {
+                    new BuildFunctions().build_library(
+                      'https://github.com/CDLUC3/mrt-inventory.git', 
+                      env.BRANCH_INV, 
                       '-DskipTests'
                     )
                   }
