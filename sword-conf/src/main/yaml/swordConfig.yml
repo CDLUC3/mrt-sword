@@ -58,24 +58,6 @@ sword-info-docker: &docker
     ingestUrlUpdate: "http://ingest:8080/ingest/update-object"
     retainTargetUrl: "true"
 
-    threadPool: "5"
-    queueCapacity: 15
-    nodePath: "yaml:"
-    replicQualify: "NONE"
-    
-  state:
-    id: replic
-    name: UC3
-    description: "UC3 replic micro-service"
-    version: "replic version"
-    serviceScheme: "Replic/1.0"
-    
-  cleanup:
-    subject: "Merritt Replication Cleanup Stage"
-    from: "uc3staff@ucop.edu"
-    to: "NONE"
-    msg: "Merritt Replication Cleanup Stage"
-
   fileLogger:
     messageMaximumLevel: 5
     messageMaximumError: 10
@@ -108,7 +90,3 @@ sword-info-docker: &docker
     user: user
     password: password
     encoding: "characterEncoding=UTF-8&characterSetResults=UTF-8&useSSL=false&serverTimezone=UTC"   # schema won't load if it's utf8mb4
-
-  scan:
-    maxkeys: 500
-    threadSleep: 100
