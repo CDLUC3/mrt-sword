@@ -272,7 +272,7 @@ http://uc3-mrt-wrk1-dev.cdlib.org:33121/submit-object
                     + " - responseCode:" + responseCode
                     );
             }
-            throw new TException.EXTERNAL_SERVICE_UNAVAILABLE(
+            throw new TException.ACCEPTED(
                     "HTTPUTIL: getObject- Error during HttpClient processing"
                     + " - responseCode:" + responseCode
                     );
