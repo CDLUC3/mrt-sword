@@ -87,6 +87,9 @@ public class IngestHandler
         } catch (SwordError sx) {
             throw sx;
             
+        } catch (TException.GATEWAY_TIMEOUT gtex) {
+            throw new SwordError(url.toString(), 504, gtex.getDetail());
+            
         } catch (TException tex) {
             tex.printStackTrace();
             throw new SwordError("Ingest handling failure url='" + url + "' Exception:" + tex.toString());
@@ -272,7 +275,13 @@ http://uc3-mrt-wrk1-dev.cdlib.org:33121/submit-object
                     + " - responseCode:" + responseCode
                     );
             }
-            throw new TException.ACCEPTED(
+            if (responseCode == 504) {
+                throw new TException.GATEWAY_TIMEOUT(
+                    "HTTPUTIL: getObject- Gateway Timeout"
+                    + " - responseCode:" + responseCode
+                    );
+            }
+            throw new TException.EXTERNAL_SERVICE_UNAVAILABLE(
                     "HTTPUTIL: getObject- Error during HttpClient processing"
                     + " - responseCode:" + responseCode
                     );
